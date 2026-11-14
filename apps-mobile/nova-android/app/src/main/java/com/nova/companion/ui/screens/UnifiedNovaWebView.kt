@@ -7,6 +7,7 @@ import android.net.http.SslError
 import android.util.Log
 import android.view.ViewGroup
 import android.webkit.ConsoleMessage
+import android.webkit.CookieManager
 import android.webkit.PermissionRequest
 import android.webkit.SslErrorHandler
 import android.webkit.ValueCallback
@@ -98,6 +99,11 @@ fun UnifiedNovaWebView(
                     )
 
                     // 1. Secured WebView Configuration
+                    CookieManager.getInstance().apply {
+                        setAcceptCookie(true)
+                        setAcceptThirdPartyCookies(this@apply, true)
+                    }
+
                     settings.apply {
                         javaScriptEnabled = true
                         domStorageEnabled = true
